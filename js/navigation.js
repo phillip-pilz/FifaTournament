@@ -11,7 +11,11 @@ function navigateOnlineTournamentPage(){
 }
 
 function navigateLocalTournamentPage(){
-    window.location = "LocalTournament.html";
+    // Wenn es noch kein aktives Turnier gibt:
+//    window.location = "LocalTournament.html";
+
+    // Wenn bereits ein Turnier läuft (Lokal)
+    window.location = "ActiveTournament.html";
 }
 
 function navigateLocalStatisticsPage(){
@@ -25,6 +29,10 @@ function navigateOnlineStatisticsPage(){
 
 function navigateActiveTournamentPage(){
     window.location = "ActiveTournament.html";
+}
+
+function navigateTournamentsPage(){
+    window.location = "LocalTournament.html";
 }
 
 function navigatePlayerPage(){
