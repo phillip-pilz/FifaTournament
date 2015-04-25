@@ -48,7 +48,15 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Ich</h3>
+            <h3 class="panel-title">
+                Ich
+                <a href="#" class="btn btn-xs btn-primary right"
+                   data-toggle="modal"
+                   data-target="#basicModal">anlegen</a>
+                <a href="#" class="btn btn-xs btn-success right"
+                   data-toggle="modal"
+                   data-target="#basicModal">bearbeiten</a>
+            </h3>
         </div>
         <div class="panel-body">
             <dl>
@@ -108,14 +116,56 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Mitspieler anlegen</h4>
             </div>
             <div class="modal-body">
-                <h3>Modal Body</h3>
+                <h3>Spieler Informationen</h3>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Benutzername*</caption>
+                    </div>
+                    <input class="col-sm-8" type="text" name="username" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Passwort</caption>
+                    </div>
+                    <input class="col-sm-8" type="password" name="password" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Passwort erneut</caption>
+                    </div>
+                    <input class="col-sm-8" type="password" name="password" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>E-Mail</caption>
+                    </div>
+                    <input class="col-sm-8" type="text" name="email" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Vorname</caption>
+                    </div>
+                    <input class="col-sm-8" type="text" name="Vorname" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Nachname</caption>
+                    </div>
+                    <input class="col-sm-8" type="text" name="Nachname" value=""/>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        <caption>Standardverein</caption>
+                    </div>
+                    <input class="col-sm-8" type="text" name="Standardverein" value=""/>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                <button type="button" class="btn btn-primary">Spieler anlegen</button>
             </div>
         </div>
     </div>
