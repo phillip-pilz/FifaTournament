@@ -75,9 +75,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#" onclick="navigateLocalTournamentPage()">Lokales Turnier</a></li>
-                        <li><a href="#" onclick="navigateOnlineTournamentPage()">Online Turnier</a></li>
+                        <!--li><a href="#" onclick="navigateOnlineTournamentPage()">Online Turnier</a></li-->
                         <li><a href="#" onclick="navigateLocalStatisticsPage()">Lokale Statistiken</a></li>
-                        <li><a href="#" onclick="navigateOnlineStatisticsPage()">Online Statistiken</a></li>
+                        <!--li><a href="#" onclick="navigateOnlineStatisticsPage()">Online Statistiken</a></li-->
+                        <li><a href="#" onclick="navigatePlayerPage()">Spieler</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -91,6 +92,11 @@
             <center><input onclick="connect(this.value)" type="button" value="cars" /></center>
             <center><b>Results</b></center>
             <ul id="result"></ul>
+
+
+            <div class="alert alert-info" role="alert">
+                <strong>Info</strong> Alle Daten sind bisher Testdaten! Aber so wird es vermutlich mal aussehen. Vorerst ;)
+            </div>
         </div>
     </body>
 </html>

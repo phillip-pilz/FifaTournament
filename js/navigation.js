@@ -21,3 +21,12 @@ function navigateLocalStatisticsPage(){
 function navigateOnlineStatisticsPage(){
     window.location = "OnlineStatistics.html";
 }
+
+
+function navigateActiveTournamentPage(){
+    window.location = "ActiveTournament.html";
+}
+
+function navigatePlayerPage(){
+    window.location = "Player.html";
+}
