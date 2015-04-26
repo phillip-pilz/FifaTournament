@@ -7,6 +7,8 @@
 }
 
 .finished {
-    box-shadow: 0 0 40px #aaa inset;
+    background: #eee !important;
+    background: #eee;
+    color: #999 !important;
     color: #999;
 }

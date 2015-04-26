@@ -21,9 +21,13 @@
     <script type="text/javascript">
         function onLoad(){
             document.addEventListener("deviceready", onDeviceReady, false);
+            getInitialData();
+
         }
 
         function onDeviceReady(){
+            getInitialData();
+
             var element = document.getElementById('deviceProperties');
             element.append('Device Model: '    + device.model);
             element.innerHTML = 'Device Model: '    + device.model    + '<br />' +
@@ -36,20 +40,84 @@
     </script>
 
     <script type="text/javascript">
-        function connect(e) {
+        function getInitialData() {
 
+            $.ajax({
+                url: 'http://apps.ppilz.de/FIFA/friendly.php',
+                success: function(data){
+                    // Hier kommt die Logik für die Datenverarbeitung
+
+                    /*$.each(data.results, function(i, row){
+                        alert(row);
+                    });*/
+
+
+                    var rows = JSON.parse(data);
+                    var players = rows['0'];
+                    var teams = rows['1'];
+                    var output = "";
+
+
+                    //
+                    //  Spieler
+                    //
+                    var HomePlayerHTML = document.getElementById('HomePlayer').innerHTML;
+                    var GuestPlayerHTML = document.getElementById('GuestPlayer').innerHTML;
+                    var HomePlayerOutput = "";
+                    var GuestPlayerOutput = "";
+                    // Spieler parsen
+                    for (var i = 0; i<= players.length-1; i++) {
+                        var id =  players[i]['ID'];
+                        var name =  players[i]['name'];
+                        HomePlayerOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                        GuestPlayerOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                    }
+
+                    document.getElementById('HomePlayer').innerHTML = HomePlayerHTML+HomePlayerOutput;
+                    document.getElementById('GuestPlayer').innerHTML = GuestPlayerHTML+GuestPlayerOutput;
+
+
+                    //
+                    //  Teams
+                    //
+                    var HomeTeamHTML = document.getElementById('HomeTeam').innerHTML;
+                    var GuestTeamHTML = document.getElementById('GuestTeam').innerHTML;
+                    var HomeTeamOutput = "";
+                    var GuestTeamOutput = "";
+                    // Spieler parsen
+                    for (var i = 0; i<= teams.length-1; i++) {
+                        var id =  teams[i]['TeamID'];
+                        var name =  teams[i]['Teamname'];
+                        HomeTeamOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                        GuestTeamOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                    }
+
+                    document.getElementById('HomeTeam').innerHTML = HomeTeamHTML+HomeTeamOutput;
+                    document.getElementById('GuestTeam').innerHTML = GuestTeamHTML+GuestTeamOutput;
+                }
+            });
+
+/*
             $.ajax({
                 type: "POST",
                 //url: 'http://apps.ppilz.de/FIFA/request.php',
-                url: 'http://apps.ppilz.de/FIFA/user.php',
+                url: 'http://apps.ppilz.de/FIFA/friendly.php',
                 //    async: false,
                 data: JSON.stringify($('#form').serializeArray()),
                 success: function(data){
                     console.log(data);
                     $("#result").html("");
-                    for(var i in data){
-                        $("#result").append("<li>"+data[i]+"</li>");
-                    }
+                    //for(var i in data){
+                    //    $("#result").append("<li>"+data[i]+"</li>");
+                    //}
+                    var json = data;
+                            obj = JSON.parse(json);
+
+                    alert(obj);
+                    $.each(data, function(key, value){
+                        $("#result").append("<li>"+key+value+"</li>");
+                        $("#result").append("<li>"+key+value+"</li>");
+                    })
                     return true;
                 },
                 complete: function() {},
@@ -58,9 +126,11 @@
                     return false;
                 }
             });
-        }
+  */      }
 
     </script>
+
+
 
 
 </head>
@@ -91,6 +161,10 @@
 </div>
 <div class="container">
 
+    <div id="result">
+
+    </div>
+
     <h1>Mache eine Freundschaftsspiel</h1>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -105,20 +179,16 @@
                             <div class="col-sm-4">
                                 <caption>Spieler</caption>
                             </div>
-                            <select name="HomePlayer">
+                            <select name="HomePlayer" id="HomePlayer">
                                 <option value="0">- Bitte auswählen -</option>
-                                <option value="1">Lutze</option>
-                                <option value="2">Nick</option>
                             </select>
                         </div>
                         <div class="clearfix">
                             <div class="col-sm-4">
                                 <caption>Team</caption>
                             </div>
-                            <select name="HomePlayer">
+                            <select name="HomeTeam" id="HomeTeam">
                                 <option value="0">- Bitte auswählen -</option>
-                                <option value="1">FC Bayern</option>
-                                <option value="2">FC Barelonca</option>
                             </select>
                         </div>
                         <div class="clearfix">
@@ -136,20 +206,16 @@
                             <div class="col-sm-4">
                                 <caption>Spieler</caption>
                             </div>
-                            <select name="GuestPlayer">
+                            <select name="GuestPlayer" id="GuestPlayer">
                                 <option value="0">- Bitte auswählen -</option>
-                                <option value="1">Lutze</option>
-                                <option value="2">Nick</option>
                             </select>
                         </div>
                         <div class="clearfix">
                             <div class="col-sm-4">
                                 <caption>Team</caption>
                             </div>
-                            <select name="GuestTeam">
+                            <select name="GuestTeam" id="GuestTeam">
                                 <option value="0">- Bitte auswählen -</option>
-                                <option value="1">FC Bayern</option>
-                                <option value="2">FC Barelonca</option>
                             </select>
                         </div>
                         <div class="clearfix">
