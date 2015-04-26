@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width;" />
+    <title>FIFA Tournament</title>
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!--    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>-->
+    <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/navigation.js"></script>
+
+
+    <script type="text/javascript">
+        function onLoad(){
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+        function onDeviceReady(){
+            var element = document.getElementById('deviceProperties');
+            element.append('Device Model: '    + device.model);
+            element.innerHTML = 'Device Model: '    + device.model    + '<br />' +
+            'Device Cordova: '  + device.cordova  + '<br />' +
+            'Device Platform: ' + device.platform + '<br />' +
+            'Device UUID: '     + device.uuid     + '<br />' +
+            'Device Version: '  + device.version  + '<br />';
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        function connect(e) {
+
+            $.ajax({
+                type: "POST",
+                //url: 'http://apps.ppilz.de/FIFA/request.php',
+                url: 'http://apps.ppilz.de/FIFA/user.php',
+                //    async: false,
+                data: JSON.stringify($('#form').serializeArray()),
+                success: function(data){
+                    console.log(data);
+                    $("#result").html("");
+                    for(var i in data){
+                        $("#result").append("<li>"+data[i]+"</li>");
+                    }
+                    return true;
+                },
+                complete: function() {},
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('ajax loading error...');
+                    return false;
+                }
+            });
+        }
+
+    </script>
+
+
+</head>
+<body onload="onLoad()">
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">FIFA Tournament</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" onclick="navigateFriendlyPage()">Freundschaftsspiel</a></li>
+                <li><a href="#" onclick="navigateTournamentsPage()">Turniere</a></li>
+                <li><a href="#" onclick="navigateLocalTournamentPage()">Lokales Turnier</a></li>
+                <!--li><a href="#" onclick="navigateOnlineTournamentPage()">Online Turnier</a></li-->
+                <li><a href="#" onclick="navigateLocalStatisticsPage()">Statistiken</a></li>
+                <!--li><a href="#" onclick="navigateOnlineStatisticsPage()">Online Statistiken</a></li-->
+                <li><a href="#" onclick="navigatePlayerPage()">Spieler</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+
+    <h1>Mache eine Freundschaftsspiel</h1>
+
+</div>
+</body>
+</html>

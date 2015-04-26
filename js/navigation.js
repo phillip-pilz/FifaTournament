@@ -38,3 +38,7 @@ function navigateTournamentsPage(){
 function navigatePlayerPage(){
     window.location = "Player.html";
 }
+
+function navigateFriendlyPage(){
+    window.location = "Friendly.html";
+}

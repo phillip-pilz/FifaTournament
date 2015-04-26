@@ -40,7 +40,8 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'http://apps.ppilz.de/FIFA/request.php',
+                    //url: 'http://apps.ppilz.de/FIFA/request.php',
+                    url: 'http://apps.ppilz.de/FIFA/user.php',
                 //    async: false,
                     data: JSON.stringify($('#form').serializeArray()),
                     success: function(data){
@@ -77,10 +78,11 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                        <li><a href="#" onclick="navigateFriendlyPage()">Freundschaftsspiel</a></li>
                         <li><a href="#" onclick="navigateTournamentsPage()">Turniere</a></li>
                         <li><a href="#" onclick="navigateLocalTournamentPage()">Lokales Turnier</a></li>
                         <!--li><a href="#" onclick="navigateOnlineTournamentPage()">Online Turnier</a></li-->
-                        <li><a href="#" onclick="navigateLocalStatisticsPage()">Lokale Statistiken</a></li>
+                        <li><a href="#" onclick="navigateLocalStatisticsPage()">Statistiken</a></li>
                         <!--li><a href="#" onclick="navigateOnlineStatisticsPage()">Online Statistiken</a></li-->
                         <li><a href="#" onclick="navigatePlayerPage()">Spieler</a></li>
                     </ul>
