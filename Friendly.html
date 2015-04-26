@@ -69,8 +69,8 @@
                     for (var i = 0; i<= players.length-1; i++) {
                         var id =  players[i]['ID'];
                         var name =  players[i]['name'];
-                        HomePlayerOutput += "<option value=\"'+id+'\" >"+name+"</option>";
-                        GuestPlayerOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                        HomePlayerOutput += "<option value="+id+" >"+name+"</option>";
+                        GuestPlayerOutput += "<option value="+id+" >"+name+"</option>";
                     }
 
                     document.getElementById('HomePlayer').innerHTML = HomePlayerHTML+HomePlayerOutput;
@@ -88,8 +88,8 @@
                     for (var i = 0; i<= teams.length-1; i++) {
                         var id =  teams[i]['TeamID'];
                         var name =  teams[i]['Teamname'];
-                        HomeTeamOutput += "<option value=\"'+id+'\" >"+name+"</option>";
-                        GuestTeamOutput += "<option value=\"'+id+'\" >"+name+"</option>";
+                        HomeTeamOutput += "<option value="+id+" >"+name+"</option>";
+                        GuestTeamOutput += "<option value="+id+" >"+name+"</option>";
                     }
 
                     document.getElementById('HomeTeam').innerHTML = HomeTeamHTML+HomeTeamOutput;
