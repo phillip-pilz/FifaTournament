@@ -47,11 +47,6 @@
                 success: function(data){
                     // Hier kommt die Logik für die Datenverarbeitung
 
-                    /*$.each(data.results, function(i, row){
-                        alert(row);
-                    });*/
-
-
                     var rows = JSON.parse(data);
                     var players = rows['0'];
                     var teams = rows['1'];
@@ -103,11 +98,9 @@
 
         function submitFriendlyForm(){
 
-
             var formData = JSON.stringify($("#createFriendly").serializeArray());
 
-            $("#result").append(formData);
-
+            //$("#result").append(formData);
 
             $.ajax({
                 type: "POST",
@@ -172,7 +165,7 @@
                             <div class="col-sm-4">
                                 <caption>Spieler</caption>
                             </div>
-                            <select name="HomePlayer" id="HomePlayer">
+                            <select name="HomePlayer" id="HomePlayer" >
                                 <option value="0">- Bitte auswählen -</option>
                             </select>
                         </div>
@@ -188,7 +181,7 @@
                             <div class="col-sm-4">
                                 <caption>Tore</caption>
                             </div>
-                            <input class="col-sm-8" type="text" name="HomeGoals" value=""/>
+                            <input class="col-sm-8" type="text" name="HomeGoals" required value="" />
                         </div>
                     </div>
                 </div>
@@ -199,7 +192,7 @@
                             <div class="col-sm-4">
                                 <caption>Spieler</caption>
                             </div>
-                            <select name="GuestPlayer" id="GuestPlayer">
+                            <select name="GuestPlayer" id="GuestPlayer" >
                                 <option value="0">- Bitte auswählen -</option>
                             </select>
                         </div>
@@ -215,7 +208,7 @@
                             <div class="col-sm-4">
                                 <caption>Tore</caption>
                             </div>
-                            <input class="col-sm-8" type="text" name="GuestGoals" value=""/>
+                            <input class="col-sm-8" type="text" name="GuestGoals" required value=""/>
                         </div>
                     </div>
                 </div>
