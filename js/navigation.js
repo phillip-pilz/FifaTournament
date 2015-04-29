@@ -42,3 +42,7 @@ function navigatePlayerPage(){
 function navigateFriendlyPage(){
     window.location = "Friendly.html";
 }
+
+function navigateCreateTournamentPage(){
+    window.location = "createTournament.html";
+}
