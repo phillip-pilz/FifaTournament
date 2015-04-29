@@ -47,8 +47,11 @@
 
 
                     var rows = JSON.parse(data);
+                    var tabelle = rows[0];
+                    var letztespiele = rows[1];
 
-                    document.getElementById('TabellePlaetze').innerHTML = rows;
+                    document.getElementById('TabellePlaetze').innerHTML = tabelle;
+                    document.getElementById('letztenSpiele').innerHTML = letztespiele;
                 }
             });
 
@@ -213,7 +216,7 @@
                         <th>Gast Team</th>
                         <th>Ergebnis</th>
                     </thead>
-                    <tbody>
+                    <tbody id="letztenSpiele">
                         <tr>
                             <td>01.01.1970</td>
                             <td>Spieler 1</td>
