@@ -12,3 +12,8 @@
     color: #999 !important;
     color: #999;
 }
+
+.description {
+    color: #666;
+    font-size: 11px;
+}

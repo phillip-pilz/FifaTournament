@@ -23,11 +23,13 @@
     <script type="text/javascript">
         function onLoad(){
             document.addEventListener("deviceready", onDeviceReady, false);
+            hidePlayerConfig();
             getInitialData();
 
         }
 
         function onDeviceReady(){
+
             getInitialData();
 
             var element = document.getElementById('deviceProperties');
@@ -42,6 +44,8 @@
     </script>
 
     <script type="text/javascript">
+
+
         function getInitialData() {
 
             $.ajax({
@@ -59,19 +63,19 @@
                     //  Spieler
                     //
                     var HomePlayerHTML = document.getElementById('HomePlayer').innerHTML;
-                    //var GuestPlayerHTML = document.getElementById('GuestPlayer').innerHTML;
+                    //var PlayerConfigHTML = document.getElementById('PlayerConfig').innerHTML;
                     var HomePlayerOutput = "";
-                    //var GuestPlayerOutput = "";
+                    //var PlayerConfigOutput = "";
                     // Spieler parsen
                     for (var i = 0; i<= players.length-1; i++) {
                         var id =  players[i]['ID'];
                         var name =  players[i]['name'];
                         HomePlayerOutput += "<option value="+id+" >"+name+"</option>";
-                        //GuestPlayerOutput += "<option value="+id+" >"+name+"</option>";
+                      //  PlayerConfigOutput += players[i]['name'];
                     }
 
                     document.getElementById('HomePlayer').innerHTML = HomePlayerHTML+HomePlayerOutput;
-                    //document.getElementById('GuestPlayer').innerHTML = GuestPlayerHTML+GuestPlayerOutput;
+                    //document.getElementById('PlayerConfig').innerHTML = PlayerConfigHTML+PlayerConfigOutput;
 
 
                     //
@@ -91,16 +95,48 @@
 
                     document.getElementById('HomeTeam').innerHTML = HomeTeamHTML+HomeTeamOutput;
                     //document.getElementById('GuestTeam').innerHTML = GuestTeamHTML+GuestTeamOutput;
+
+
+
+
+                    // Erstelle die PlayerConfig Liste
+                    createPlayerConfigList(rows);
                 }
             });
 
         }
 
+        function createPlayerConfigList(rows){
 
+        }
+
+
+        function getDefaultTeam($selectedTeam){
+
+
+
+
+            $.ajax({
+                url: 'http://apps.ppilz.de/FIFA/getAllTeams.php',
+                success: function (data) {
+                    // Hier kommt die Logik für die Datenverarbeitung
+                    var rows = JSON.parse(data);
+
+
+
+                }
+            })
+
+
+
+
+        }
 
         function submitTournamentForm(){
 
-            window.location = "ActiveTournament.html";
+            navigateActiveTournamentPage();
+
+            //window.location = "ActiveTournament.html";
 
             /*
 
@@ -123,6 +159,43 @@
             });
              */
         }
+
+        function refreshPlayers(){
+            //var listBox = document.getElementById('HomePlayer');
+
+
+            var Players = $('#HomePlayer').val();
+
+            hidePlayerConfig();
+
+            for (var i = 0; i<= Players.length-1; i++) {
+                //alert(Players[i]);
+                $('#PlayerRow-'+Players[i]).show();
+            }
+
+            /* Array [ "1", "5", "6" ]*/
+
+
+
+        }
+
+        function hidePlayerConfig(){
+            $('.PlayerRow').hide();
+        }
+
+
+/*
+        $('#HomePlayer option').change(
+                function(){
+                    alert($this);
+                }
+        );*/
+/*
+        $('#HomePlayer option').trigger('change'); //change to two ? how?
+        $('#HomePlayer option').change(function(){
+            var data= $(this).val();
+            alert(data);
+        });*/
     </script>
 
 
@@ -168,20 +241,20 @@
         <div class="panel-body">
             <form method="POST" name="createFriendly" id="createFriendly" >
                 <div class="col-sm-6 ">
-                    <caption>Mitspieler</caption>
+                    <caption>Turniereinstellungen</caption>
                     <div>
                         <div class="clearfix">
                             <div class="col-sm-4">
-                                <caption>Spieler</caption>
+                                <caption>Turnier Teilnehmer</caption>
                             </div>
-                            <select name="HomePlayer" id="HomePlayer" multiple>
+                            <select name="HomePlayer" id="HomePlayer" onchange="refreshPlayers()" multiple>
                             </select>
                         </div>
                         <div class="clearfix">
                             <div class="col-sm-4">
                                 <caption>Spiele gegeneinander</caption>
                             </div>
-                            <select name="HomeTeam" id="HomeTeam">
+                            <select name="Rounds" id="Rounds">
                                 <option value="0">1</option>
                                 <option value="1">2</option>
                                 <option value="2">3</option>
@@ -194,16 +267,77 @@
                             <div class="col-sm-4">
                                 <caption>Saison</caption>
                             </div>
-                            <input class="col-sm-8" type="checkbox" name="HomeGoals" required value="" />
-                            <div class="description">
+                            <input class="col-sm-8" type="checkbox" name="HomeGoals" />
+                            <div class="description col-sm-12">
                                 Die legt die Spiele gegeneinander auf 2 Spiele fest.
                                 In der Saison spielt jeder 2 mal gegeneinander. Wird eine Saison gespielt, können immer nur Spiele des gleichen Spieltags eingetragen werden. Dieser Modus eignet sich für eine größere Teilnehmerzahl die nicht immer in kompletter Besetzung miteinander spielen können. Sobald alle Spiele eines Spieltages eingetragen sind, wird der neue Spieltag freigeschaltet. Beide Spieler eines Spieles können ihr Spiel um einen Spieltag verschieben.
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="action" value="createTournament" />
-                <button type="submit" class="btn btn-sm btn-success" onclick="submitTournamentForm()">Turnier speichern</button>
+
+                <div class="col-sm-6">
+                    <caption>Spielereinstellungen</caption>
+                    <div id="PlayerConfig">
+                        <table style="width:100%" class="table table-striped">
+                            <thead>
+                                <th>Spieler</th>
+                                <th>Mannschaft</th>
+                            </thead>
+                            <tbody>
+                                <tr id="PlayerRow-1" class="PlayerRow">
+                                    <td>
+                                        <p>Spieler 1</p>
+                                    </td>
+                                    <td>
+                                        <select name="PlayerTeam-1" id="PlayerTeam-1">
+                                            <option value="0">FC Bayern München</option>
+                                            <option value="1">FC Barcelona</option>
+                                            <option value="2">3</option>
+                                            <option value="3">4</option>
+                                            <option value="4">5</option>
+                                            <option value="5">6</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr id="PlayerRow-5" class="PlayerRow">
+                                    <td>
+                                        <p>Spieler 1</p>
+                                    </td>
+                                    <td>
+                                        <select name="PlayerTeam-5" id="PlayerTeam-5">
+                                            <option value="0">FC Bayern München</option>
+                                            <option value="1">FC Barcelona</option>
+                                            <option value="2">3</option>
+                                            <option value="3">4</option>
+                                            <option value="4">5</option>
+                                            <option value="5">6</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr id="PlayerRow-6" class="PlayerRow">
+                                    <td>
+                                        <p>Spieler 1</p>
+                                    </td>
+                                    <td>
+                                        <select name="PlayerTeam-6" id="PlayerTeam-6">
+                                            <option value="0">FC Bayern München</option>
+                                            <option value="1">FC Barcelona</option>
+                                            <option value="2">3</option>
+                                            <option value="3">4</option>
+                                            <option value="4">5</option>
+                                            <option value="5">6</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <input type="hidden" name="action" value="createTournament" />
+                    <button type="submit" class="btn btn-sm btn-success" onclick="navigateActiveTournamentPage()">Turnier speichern</button>
+                </div>
             </form>
 
         </div>
