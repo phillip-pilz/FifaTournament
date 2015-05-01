@@ -23,9 +23,9 @@
     <script type="text/javascript">
         function onLoad(){
             document.addEventListener("deviceready", onDeviceReady, false);
-            hidePlayerConfig();
             getInitialData();
-
+            createPlayerConfigList();
+            hidePlayerConfig();
         }
 
         function onDeviceReady(){
@@ -100,32 +100,35 @@
 
 
                     // Erstelle die PlayerConfig Liste
-                    createPlayerConfigList(rows);
+                    //createPlayerConfigList(rows);
                 }
             });
 
         }
 
-        function createPlayerConfigList(rows){
-
-        }
-
-
-        function getDefaultTeam($selectedTeam){
-
-
-
-
+        function createPlayerConfigList(){
             $.ajax({
                 url: 'http://apps.ppilz.de/FIFA/getAllTeams.php',
                 success: function (data) {
                     // Hier kommt die Logik für die Datenverarbeitung
                     var rows = JSON.parse(data);
+                    document.getElementById('PlayerConfigTBODY').innerHTML = rows;
 
 
 
                 }
             })
+
+            hidePlayerConfig();
+        }
+
+
+        function getPlayerStatistics($selectedTeam){
+
+
+
+
+
 
 
 
@@ -284,7 +287,7 @@
                                 <th>Spieler</th>
                                 <th>Mannschaft</th>
                             </thead>
-                            <tbody>
+                            <tbody id="PlayerConfigTBODY">
                                 <tr id="PlayerRow-1" class="PlayerRow">
                                     <td>
                                         <p>Spieler 1</p>
